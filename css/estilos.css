@@ -1,0 +1,31 @@
+body{
+    margin-top: 30px;
+    /*background-color:black   */
+}
+
+.botones{
+    margin-left: 450px;
+}
+
+.error .carga .editado{
+    position: fixed;
+    bottom:0;
+    width: 100%;
+    margin: 0;    
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#busqueda{
+    margin-left: 0px;
+}
+

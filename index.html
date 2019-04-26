@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Carga de Datos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
+        <script src="js/function.js" type="text/javascript"></script>
+        
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+        <script src="js/db.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body onload="startDB()">
+        <div id="cargas" class="container" >
+            <form  class="needs-validation" novalidate>
+                <fieldset class="">
+                    <h2 style="text-align: center">Datos de los Empleados</h2>
+                    <div class="form-row">
+                        <!-- Fecha Actual -->
+                        <div class="form-group col-md-2" id="fecha">
+                            <label class="" for="fecha_ingreso"  >Fecha de Ingreso</label>
+                            <input type="text" class="form-control form-control-sm  " id="fecha_actual" >
+                        </div>                        
+                    </div>
+                    <div class="form-row">
+                        <!--Cedula -->
+                        <div class="form-group col-md-2 " >
+                            <label class="" for="" >Cedula</label>
+                            <input onkeyup="format(this)" onchange="format(this)"  type="text" class="form-control form-control-sm   " id="cedula" placeholder="Cedula"   required >
+                            <div class="invalid-tooltip  " style="width: 100%">
+                                <p> -Debe cargar una Cedula! </p>                                
+                            </div>
+                        </div>
+                        <!--Nombre -->
+                        <div class="form-group col-md-2  " >
+                            <label  class="" for="" >Nombre</label>
+                            <input type="text" class="form-control form-control-sm "  id="nombre" placeholder="Nombre" maxlength="20"  required >
+                            <div class="invalid-tooltip ">
+                                Debe cargar un Nombre!
+                            </div>
+                        </div>
+                        <!--Apellido -->
+                        <div class="form-group col-md-2 ">
+                            <label class=""  for="exampleFormControlapellido" >Apellido</label>
+                            <input type="text" class="form-control form-control-sm  " id="apellido" placeholder="Apellido" required>
+                            <div class="invalid-tooltip ">
+                                Debe cargar un Apellido!
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2 " style="visibility: hidden">
+                            <label class=""  for="exampleFormControlapellido">Id</label>
+                            <input type="text" class="form-control form-control-sm  " id="id" placeholder="cod_alu" >
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <!--Fecha de Nacimiento -->
+                        <div class="form-group col-md-2 ">
+                            <label class="" for="" >Nacimiento</label>
+                            <input type="date" class="form-control form-control-sm  " id="fechanaci" required >
+                            <div class="invalid-tooltip " style="width: 100%">
+                                <p>  -Debe cargar la Fecha de Nacimiento!  </p>                                
+                            </div>
+                        </div>
+                        <!-- Campo Edad -->
+                        <div class="form-group col-md-1 ">
+                            <label class=""  for="" >Edad</label>
+                            <input type="number" class="form-control form-control-sm  " min="18"  id="edad" placeholder="Edad" required >
+                            <div class="invalid-tooltip " style="width: 100%">
+                                <p>Debe cargar la Edad!</p>
+                                <p>Debe ser mayor de Edad</p>
+                            </div>
+                        </div>
+                        <!-- Campo Correo Electronico -->
+                        <div class="form-group col-md-3  ">
+                            <label class=""  for="" >Correo Electronico</label>
+                            <input type="email" class="form-control form-control-sm  "  id="correo" placeholder="Correo" autocomplete="on" required  >
+                            <div class="invalid-tooltip ">
+                                <p> Debe introducir el correo! </p>
+                                <p> Ingrese un Correo Valido </p>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="form-row">
+                        <!--Genero -->
+                        <div class="form-group col-md-2 " >
+                            <label  class="" for="" >Sexo</label>
+                            <select class="form-control form-control-sm "  id="sexo" required >
+                                <option> </option>
+                                <option>Masculino</option>
+                                <option>Femenino</option>
+                            </select>
+                            <div class="invalid-tooltip ">
+                                Debe introducir su Genero!
+                            </div>
+                        </div>
+                        <!--Tipo de Empleado-->
+                        <div class="form-group col-md-2">
+                            <label class=""  for="">Tipo de Empleado</label>
+                            <select class="form-control form-control-sm"  id="tipoempleado"  required  >
+                                <option> </option>
+                                <option>Contratado</option>
+                                <option>Pasante</option>
+                            </select>
+                            <div class="invalid-tooltip ">
+                                Debe introducir el tipo de empleado!
+                            </div>
+                        </div>
+                        <!-- Salario -->
+                        <div class="form-group col-md-2  ">
+                                <label class="">Salario</label>
+                                <input  onkeyup="format(this)" onchange="format(this)" type="text" class="form-control form-control-sm  " id="salario" placeholder="Salario"  required >
+                                <div class="invalid-tooltip ">
+                                    Debe introducir el salario!
+                                </div>
+                        </div>
+                        <!-- Campo Nro Celular -->
+                        <div class="form-group col-md-2">
+                            <label class=""  for="">Nº Celular</label>
+                            <input type="text" class="form-control form-control-sm" id="cel" placeholder="Nº Celular" required >
+                            <div class="invalid-tooltip ">
+                                Debe introducir su Nº de Celular!
+                            </div>
+                        </div> 
+                    </div>
+                </fieldset>
+                <hr>               
+                <div class="form-row">                    
+                    <button id="btnRegistrar"  class="btn btn-success col-md-2 col-sm-3   ">Registrar</button>&nbsp;
+                    <button id="btnEditar"  class="btn col-md-2 col-sm-3 ">Editar</button>&nbsp;
+                </div>
+                <hr>
+            </form>
+        </div>
+        <br>
+        <br>
+        <div id="errorcarga" class="alert alert-warning error" style="text-align: center">Ya existe la C.I. Intente nuevamente </div>
+        <div id="carga" class="alert alert-success carga" style="text-align: center">Datos agregados</div>  
+        <div id="modifi" class="alert alert-info carga" style="text-align: center">Datos modificados</div>  
+
+        <!-- PARTE DE LA BUSQUEDA DE DATOS  -->
+        <div id="busquedaregistro" >
+            <a  style="margin-left: 50px;">Escriba un nro de C.I. Nombre o Apellido</a>
+            <input style="margin-left: 10px;" id="myInput" type="text" placeholder="Busqueda" >
+            <br>
+            <hr>
+            <div class="container col-md-12 " id="elements" >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cod</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Cedula</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Sexo</th>
+                            <th>Tipo Empleado</th>
+                            <th>Cel</th>
+                            <th>Salario</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="elementsList">
+                        <tr>
+                            <td colspan="3">No hay elementos que mostrar</td>
+                        </tr>
+                    </tbody>
+                </table>               
+            </div>  
+        </div>  <!-- FIN -->   
+        <br>
+        <br>
+        <br>
+    </body>
+</html>
